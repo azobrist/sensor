@@ -7,8 +7,12 @@ imu = ICM20948()
 print("ax,ay,az,gx,gy,gz,mx,my,mz")
 
 def read_all(imu):
-    line = imu.read_accelerometer_gyro_data()
-    line += imu.read_magnetometer_data()
+    data = imu.read_accelerometer_gyro_data()
+    data += imu.read_magnetometer_data()
+    line = ""
+    for i,x in enumerate(data[:-1]):
+        line+="{:05.2f},".format(x) 
+    line+="{:05.2f}".format(data[-1])
     print(line)
     return line
 

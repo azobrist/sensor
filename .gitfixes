@@ -1,15 +1,14 @@
+read.py:7: print("ax,ay,az,gx,gy,gz,mx,my,mz")
+read.py:8: 
 read.py:9: def read_all(imu):
-read.py:10:     line = imu.read_accelerometer_gyro_data()
-read.py:11:     line += imu.read_magnetometer_data()
-read.py:12:+    print(line)
-read.py:13:     return line
-read.py:14: 
-read.py:15: if __name__ == "__main__":
-server.py:14:     elif state == "MESSAGE":
-server.py:15:         print("Server:-- Message received:",msg)
-server.py:16:         if msg == "go":
-server.py:17:-            server.sendMessage(read_all(imu))
-server.py:17:+            server.sendMessage(read_all(imu)[0])
-server.py:18:         if msg == "end":
-server.py:19:             server.terminate()
-server.py:20: 
+read.py:10:-    line = imu.read_accelerometer_gyro_data()
+read.py:10:-    line += imu.read_magnetometer_data()
+read.py:10:+    data = imu.read_accelerometer_gyro_data()
+read.py:11:+    data += imu.read_magnetometer_data()
+read.py:12:+    line = ""
+read.py:13:+    for i,x in enumerate(data[:-1]):
+read.py:14:+        line+="{:05.2f},".format(x) 
+read.py:15:+    line+="{:05.2f}".format(data[-1])
+read.py:16:     print(line)
+read.py:17:     return line
+read.py:18: 
