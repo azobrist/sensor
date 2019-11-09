@@ -16,7 +16,7 @@ def onStateChanged(state, msg):
         if msg == "go":
             msg = read_all(imu)
             print(msg)
-            server.sendMessage(msg)
+            server.sendMessage(msg[0])
         if msg == "end":
             server.terminate()
 
