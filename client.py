@@ -17,7 +17,7 @@ def onStateChanged(state, msg):
        print("Client:-- Connection lost.")
        isConnected = False
     elif state == "MESSAGE":
-       print(f"Client:-- Received data:{msg}")
+       print("Client:-- Received data: {0}".format(msg))
 
 client = TCPClient(IP_ADDRESS, IP_PORT, stateChanged = onStateChanged)
 rc = client.connect()
