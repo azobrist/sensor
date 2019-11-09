@@ -9,11 +9,10 @@ print("ax,ay,az,gx,gy,gz,mx,my,mz")
 def read_all(imu):
     data = imu.read_accelerometer_gyro_data()
     data += imu.read_magnetometer_data()
-    ts=time.time()
     line = ""
-    for i,x in enumerate(data):
+    for i,x in enumerate(data[:-1]):
         line+="{:05.2f},".format(x) 
-    line+=ts
+    line+="{:05.2f}".format(data[-1])
     print(line)
     return line
 
