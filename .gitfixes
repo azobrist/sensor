@@ -1,5 +1,10 @@
-read.py:1:-#!/usr/bin/python3
-read.py:1:+#!/usr/bin/python2
-read.py:2: import time
-read.py:3: from icm20948 import ICM20948
-read.py:4: 
+read.py:21: 
+read.py:22:     line = ""
+read.py:23:     for i,x in enumerate(data[:-1]):
+read.py:24:-        line+=f"{x:05.2f}"+"," 
+read.py:24:-    line+=f"{data[-1]:05.2f}"
+read.py:24:+        line+="{:05.2f},".format(x) 
+read.py:25:+    line+="{:05.2f}".format(data[-1])
+read.py:26:     print(line)
+read.py:27: 
+read.py:28:     time.sleep(0.25)

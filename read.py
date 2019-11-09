@@ -21,8 +21,8 @@ while True:
 
     line = ""
     for i,x in enumerate(data[:-1]):
-        line+=f"{x:05.2f}"+"," 
-    line+=f"{data[-1]:05.2f}"
+        line+="{:05.2f},".format(x) 
+    line+="{:05.2f}".format(data[-1])
     print(line)
 
     time.sleep(0.25)
