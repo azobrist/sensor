@@ -20,7 +20,8 @@ def onStateChanged(state, msg):
        isConnected = False
     elif state == "MESSAGE":
        print("Client:-- Received data:",msg)
-    #    data = msg.split(",")
+       data = msg.split(",")
+       print(data)
     #    ts = data[-1]
     #    print("deltat:",ts-last)
     #    last=ts

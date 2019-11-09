@@ -1,29 +1,9 @@
-client.py:9: last=0
-client.py:10: 
-client.py:11: def onStateChanged(state, msg):
-client.py:12:-    print(state)
-client.py:12:+    global last
-client.py:13:     global isConnected
-client.py:14:     if state == "CONNECTING":
-client.py:15:        print("Client:-- Waiting for connection...")
 client.py:20:        isConnected = False
 client.py:21:     elif state == "MESSAGE":
 client.py:22:        print("Client:-- Received data:",msg)
-client.py:23:-       data = msg.split(",")
-client.py:23:-       ts = data[-1]
-client.py:23:-       print("deltat:",ts-last)
-client.py:23:-       last=ts
-client.py:23:+    #    data = msg.split(",")
-client.py:24:+    #    ts = data[-1]
-client.py:25:+    #    print("deltat:",ts-last)
-client.py:26:+    #    last=ts
-client.py:27: 
-client.py:28: client = TCPClient(IP_ADDRESS, IP_PORT, stateChanged = onStateChanged, isVerbose = False)
-client.py:29: rc = client.connect()
-server.py:15:         print("Server:-- Message received:",msg)
-server.py:16:         if msg == "go":
-server.py:17:             msg = read_all(imu)
-server.py:18:+            print(msg)
-server.py:19:             server.sendMessage(msg)
-server.py:20:         if msg == "end":
-server.py:21:             server.terminate()
+client.py:23:-    #    data = msg.split(",")
+client.py:23:+       data = msg.split(",")
+client.py:24:+       print(data)
+client.py:25:     #    ts = data[-1]
+client.py:26:     #    print("deltat:",ts-last)
+client.py:27:     #    last=ts
