@@ -4,8 +4,9 @@ import time
 
 IP_PORT = 22000
 
-def onStateChanged(state, msg):
+def onStateChanged(state, byt):
     print(state)
+    msg = byt.decode()
     if state == "LISTENING":
         print("Server:-- Listening...")
     elif state == "CONNECTED":
