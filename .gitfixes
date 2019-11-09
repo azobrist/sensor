@@ -1,8 +1,32 @@
+client.py:1:-#!/usr/bin/python2
+client.py:1:-from tcpcom2 import TCPClient
+client.py:1:+#!/usr/bin/python3
+client.py:2:+from tcpcom import TCPClient
+client.py:3: import time
+client.py:4: 
+client.py:5: IP_ADDRESS = "192.168.1.206"
+client.py:18:     elif state == "MESSAGE":
+client.py:19:        print("Client:-- Received data: {0}".format(msg))
+client.py:20: 
+client.py:21:-client = TCPClient(IP_ADDRESS, IP_PORT, stateChanged = onStateChanged)
+client.py:21:+client = TCPClient(IP_ADDRESS, IP_PORT, stateChanged = onStateChanged, isVerbose = True)
+client.py:22: rc = client.connect()
+client.py:23: msg="go"
+client.py:24: if rc:
+server.py:1:-#!/usr/bin/python2
+server.py:1:-from tcpcom2 import TCPServer
+server.py:1:+#!/usr/bin/python3
+server.py:2:+from tcpcom import TCPServer
+server.py:3: import time
+server.py:4: 
+server.py:5: IP_PORT = 22000
 server.py:15:         if msg == "go":
 server.py:16:             server.sendMessage("Hello")
 server.py:17:         if msg == "end":
-server.py:18:+            print("here")
-server.py:19:             server.terminate()
-server.py:20: 
-server.py:21: server = TCPServer(IP_PORT, stateChanged = onStateChanged)
+server.py:18:-            print("here")
+server.py:18:             server.terminate()
+server.py:19: 
+server.py:20:-server = TCPServer(IP_PORT, stateChanged = onStateChanged)
+server.py:20: No newline at end of file
+server.py:21:+server = TCPServer(IP_PORT, stateChanged = onStateChanged, isVerbose = True)
 server.py:22: No newline at end of file

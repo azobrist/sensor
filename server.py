@@ -1,5 +1,5 @@
-#!/usr/bin/python2
-from tcpcom2 import TCPServer
+#!/usr/bin/python3
+from tcpcom import TCPServer
 import time
 
 IP_PORT = 22000
@@ -15,7 +15,6 @@ def onStateChanged(state, msg):
         if msg == "go":
             server.sendMessage("Hello")
         if msg == "end":
-            print("here")
             server.terminate()
 
-server = TCPServer(IP_PORT, stateChanged = onStateChanged)
+server = TCPServer(IP_PORT, stateChanged = onStateChanged, isVerbose = True)
