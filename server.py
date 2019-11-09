@@ -1,5 +1,4 @@
-# DataServer2.py
-
+#!/usr/bin/python3
 from tcpcom import TCPServer
 import time
 

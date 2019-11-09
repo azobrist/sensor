@@ -1,0 +1,10 @@
+client.py:1:+#!/usr/bin/python3
+client.py:2: from tcpcom import TCPClient
+client.py:3: import time
+client.py:4: 
+server.py:1:-# DataServer2.py
+server.py:1:-
+server.py:1:+#!/usr/bin/python3
+server.py:2: from tcpcom import TCPServer
+server.py:3: import time
+server.py:4: 

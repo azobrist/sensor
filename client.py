@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from tcpcom import TCPClient
 import time
 
