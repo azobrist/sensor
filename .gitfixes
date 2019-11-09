@@ -1,23 +1,8 @@
-client.py:20: 
-client.py:21: client = TCPClient(IP_ADDRESS, IP_PORT, stateChanged = onStateChanged)
-client.py:22: rc = client.connect()
-client.py:23:+msg="go"
-client.py:24: if rc:
-client.py:25:     isConnected = True
-client.py:26:     while isConnected:
-client.py:27:         print("Client:-- Sending command: go...")
-client.py:28:-        client.sendMessage("go")
-client.py:28:+        client.sendMessage(msg)
-client.py:29:         time.sleep(2)
-client.py:30:+        msg="end"
-client.py:31:     print("Done")    
-client.py:32: else:
-client.py:33:     print("Client:-- Connection failed") 
-server.py:14:         print("Server:-- Message received: {0}".format(msg))
 server.py:15:         if msg == "go":
 server.py:16:             server.sendMessage("Hello")
-server.py:17:+        if msg == "end":
-server.py:18:+            server.terminate()
-server.py:19: 
-server.py:20: server = TCPServer(IP_PORT, stateChanged = onStateChanged)
-server.py:21: No newline at end of file
+server.py:17:         if msg == "end":
+server.py:18:+            print("here")
+server.py:19:             server.terminate()
+server.py:20: 
+server.py:21: server = TCPServer(IP_PORT, stateChanged = onStateChanged)
+server.py:22: No newline at end of file

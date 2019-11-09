@@ -15,6 +15,7 @@ def onStateChanged(state, msg):
         if msg == "go":
             server.sendMessage("Hello")
         if msg == "end":
+            print("here")
             server.terminate()
 
 server = TCPServer(IP_PORT, stateChanged = onStateChanged)
