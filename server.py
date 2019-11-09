@@ -13,7 +13,7 @@ def onStateChanged(state, msg):
     elif state == "CONNECTED":
         print("Server:-- Connected to {0}".format(msg))
     elif state == "MESSAGE":
-        print("Server:-- Message received: {0}".formt(msg))
+        print("Server:-- Message received: {0}".format(msg))
         if msg == "go":
             server.sendMessage("Hello")
 

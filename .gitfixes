@@ -1,22 +1,8 @@
-client.py:17:        print("Client:-- Connection lost.")
-client.py:18:        isConnected = False
-client.py:19:     elif state == "MESSAGE":
-client.py:20:-       print(f"Client:-- Received data:{msg}")
-client.py:20:+       print("Client:-- Received data: {0}".format(msg))
-client.py:21: 
-client.py:22: client = TCPClient(IP_ADDRESS, IP_PORT, stateChanged = onStateChanged)
-client.py:23: rc = client.connect()
-server.py:9: 
-server.py:10: def onStateChanged(state, msg):
-server.py:11:     if state == "LISTENING":
-server.py:12:-        print( "Server:-- Listening...")
-server.py:12:+        print("Server:-- Listening...")
 server.py:13:     elif state == "CONNECTED":
-server.py:14:-        print(f"Server:-- Connected to{msg}")
-server.py:14:+        print("Server:-- Connected to {0}".format(msg))
+server.py:14:         print("Server:-- Connected to {0}".format(msg))
 server.py:15:     elif state == "MESSAGE":
-server.py:16:-        print(f"Server:-- Message received:{msg}")
-server.py:16:+        print("Server:-- Message received: {0}".formt(msg))
+server.py:16:-        print("Server:-- Message received: {0}".formt(msg))
+server.py:16:+        print("Server:-- Message received: {0}".format(msg))
 server.py:17:         if msg == "go":
 server.py:18:             server.sendMessage("Hello")
 server.py:19: 
