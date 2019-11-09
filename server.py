@@ -1,5 +1,5 @@
-#!/usr/bin/python3
-from tcpcom import TCPServer
+#!/usr/bin/python2
+from tcpcom2 import TCPServer
 from socket import *
 
 import time

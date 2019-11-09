@@ -1,10 +1,10 @@
-#!/usr/bin/python3
-from tcpcom import TCPClient
+#!/usr/bin/python2
+from tcpcom2 import TCPClient
 from socket import *
 import time
 
 print(gethostname())
-IP_ADDRESS = "192.168.0.17"
+IP_ADDRESS = "192.168.1.206"
 IP_PORT = 22000
 
 def onStateChanged(state, msg):
