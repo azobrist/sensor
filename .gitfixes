@@ -1,8 +1,49 @@
-server.py:14:     elif state == "MESSAGE":
-server.py:15:         print("Server:-- Message received:",msg)
-server.py:16:         if msg == "go":
-server.py:17:-            server.sendMessage(read_all(imu)[0])
-server.py:17:+            server.sendMessage(read_all(imu))
-server.py:18:         if msg == "end":
-server.py:19:             server.terminate()
-server.py:20: 
+client.py:5: IP_ADDRESS = "192.168.1.206"
+client.py:6: IP_PORT = 22000
+client.py:7: 
+client.py:8:+ts=0
+client.py:9:+last=0
+client.py:10:+
+client.py:11: def onStateChanged(state, msg):
+client.py:12:     print(state)
+client.py:13:     global isConnected
+client.py:20:        isConnected = False
+client.py:21:     elif state == "MESSAGE":
+client.py:22:        print("Client:-- Received data:",msg)
+client.py:23:+       data = msg.split(",")
+client.py:24:+       ts = data[-1]
+client.py:25:+       print("deltat:",ts-last)
+client.py:26:+       last=ts
+client.py:27: 
+client.py:28: client = TCPClient(IP_ADDRESS, IP_PORT, stateChanged = onStateChanged, isVerbose = False)
+client.py:29: rc = client.connect()
+client.py:30: msg="go"
+client.py:31:+cnt = 0
+client.py:32:+delay_s = 0.1
+client.py:33: if rc:
+client.py:34:     isConnected = True
+client.py:35:     while isConnected:
+client.py:36:         print("Client:-- Sending command: go...")
+client.py:37:         client.sendMessage(msg)
+client.py:38:-        time.sleep(2)
+client.py:38:-        msg="end"
+client.py:38:+        time.sleep(delay_s)
+client.py:39:+        if cnt == 10:
+client.py:40:+            msg="end"
+client.py:41:+        cnt+=1
+client.py:42:     print("Done")    
+client.py:43: else:
+client.py:44:     print("Client:-- Connection failed") 
+read.py:9: def read_all(imu):
+read.py:10:     data = imu.read_accelerometer_gyro_data()
+read.py:11:     data += imu.read_magnetometer_data()
+read.py:12:+    ts=time.time()
+read.py:13:     line = ""
+read.py:14:-    for i,x in enumerate(data[:-1]):
+read.py:14:+    for i,x in enumerate(data):
+read.py:15:         line+="{:05.2f},".format(x) 
+read.py:16:-    line+="{:05.2f}".format(data[-1])
+read.py:16:+    line+="",ts
+read.py:17:     print(line)
+read.py:18:     return line
+read.py:19: 
