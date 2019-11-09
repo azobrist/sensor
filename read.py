@@ -13,7 +13,7 @@ def read_all(imu):
     line = ""
     for i,x in enumerate(data):
         line+="{:05.2f},".format(x) 
-    line+="",ts
+    line+=ts
     print(line)
     return line
 
