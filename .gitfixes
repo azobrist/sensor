@@ -1,0 +1,164 @@
+tcpcom.py:13:  '''
+tcpcom.py:14: 
+tcpcom.py:15: from threading import Thread
+tcpcom.py:16:-import thread
+tcpcom.py:16:+import _thread
+tcpcom.py:17: import socket
+tcpcom.py:18: import time
+tcpcom.py:19: import sys
+tcpcom.py:105:         try:
+tcpcom.py:106:             self.serverSocket.bind((HOSTNAME, self.port))
+tcpcom.py:107:         except socket.error as msg:
+tcpcom.py:108:-            print "Fatal error while creating TCPServer: Bind failed.", msg[0], msg[1]
+tcpcom.py:108:+            print("Fatal error while creating TCPServer: Bind failed.", msg[0], msg[1])
+tcpcom.py:109:             sys.exit()
+tcpcom.py:110:         try:    
+tcpcom.py:111:             self.serverSocket.listen(10)
+tcpcom.py:112:         except:
+tcpcom.py:113:-            print "Fatal error while creating TCPServer: Port", self.port, "already in use"
+tcpcom.py:113:+            print("Fatal error while creating TCPServer: Port", self.port, "already in use")
+tcpcom.py:114:             try:
+tcpcom.py:115:                 self.stateChanged(TCPServer.PORT_IN_USE, str(self.port))
+tcpcom.py:116:-            except Exception, e:
+tcpcom.py:116:-               print "Caught exception in TCPServer.PORT_IN_USE:", e
+tcpcom.py:116:+            except Exception as e:
+tcpcom.py:117:+               print("Caught exception in TCPServer.PORT_IN_USE:", e)
+tcpcom.py:118:             sys.exit()
+tcpcom.py:119: 
+tcpcom.py:120:         try:
+tcpcom.py:121:             self.stateChanged(TCPServer.LISTENING, str(self.port))
+tcpcom.py:122:-        except Exception, e:
+tcpcom.py:122:-            print "Caught exception in TCPServer.LISTENING:", e
+tcpcom.py:122:+        except Exception as e:
+tcpcom.py:123:+            print("Caught exception in TCPServer.LISTENING:", e)
+tcpcom.py:124: 
+tcpcom.py:125:         self.isServerRunning = True
+tcpcom.py:126:                 
+tcpcom.py:145:             self.socketHandler.start()
+tcpcom.py:146:             try: 
+tcpcom.py:147:                 self.stateChanged(TCPServer.CONNECTED, self.addr[0])
+tcpcom.py:148:-            except Exception, e:
+tcpcom.py:148:-                print "Caught exception in TCPServer.CONNECTED:", e
+tcpcom.py:148:+            except Exception as e:
+tcpcom.py:149:+                print("Caught exception in TCPServer.CONNECTED:", e)
+tcpcom.py:150:         self.conn.close()
+tcpcom.py:151:         self.serverSocket.close()
+tcpcom.py:152:         self.isClientConnected = False
+tcpcom.py:153:         try:
+tcpcom.py:154:             self.stateChanged(TCPServer.TERMINATED, "")
+tcpcom.py:155:-        except Exception, e:
+tcpcom.py:155:-            print "Caught exception in TCPServer.TERMINATED:", e
+tcpcom.py:155:+        except Exception as e:
+tcpcom.py:156:+            print("Caught exception in TCPServer.TERMINATED:", e)
+tcpcom.py:157:         self.isServerRunning = False
+tcpcom.py:158:         TCPServer.debug("TCPServer thread terminated")
+tcpcom.py:159:         
+tcpcom.py:184:             self.isClientConnected = False
+tcpcom.py:185:             try:
+tcpcom.py:186:                 self.stateChanged(TCPServer.LISTENING, str(self.port))
+tcpcom.py:187:-            except Exception, e:
+tcpcom.py:187:-                print "Caught exception in TCPServer.LISTENING:", e
+tcpcom.py:187:+            except Exception as e:
+tcpcom.py:188:+                print("Caught exception in TCPServer.LISTENING:", e)
+tcpcom.py:189:             TCPServer.debug("Shutdown socket now")
+tcpcom.py:190:             try:
+tcpcom.py:191:                 self.conn.shutdown(socket.SHUT_RDWR)
+tcpcom.py:236:     @staticmethod
+tcpcom.py:237:     def debug(msg):
+tcpcom.py:238:         if TCPServer.isVerbose:
+tcpcom.py:239:-            print "   TCPServer-> " + msg
+tcpcom.py:239:+            print("   TCPServer-> " + msg)
+tcpcom.py:240:  
+tcpcom.py:241:     @staticmethod
+tcpcom.py:242:     def getVersion():
+tcpcom.py:296:                 for i in range(len(junk) - 1):
+tcpcom.py:297:                     try:
+tcpcom.py:298:                         self.server.stateChanged(TCPServer.MESSAGE, junk[i]) # eol is not included
+tcpcom.py:299:-                    except Exception, e:
+tcpcom.py:299:-                        print "Caught exception in TCPServer.MESSAGE:", e
+tcpcom.py:299:+                    except Exception as e:
+tcpcom.py:300:+                        print("Caught exception in TCPServer.MESSAGE:", e)
+tcpcom.py:301:                 if not self.server.isClientConnected: # Callback disconnected the client
+tcpcom.py:302:                      if timeoutThread != None:
+tcpcom.py:303:                         timeoutThread.stop()
+tcpcom.py:396:             timeout = None
+tcpcom.py:397:         try:
+tcpcom.py:398:             self.stateChanged(TCPClient.CONNECTING, self.ipAddress + ":" + str(self.port))
+tcpcom.py:399:-        except Exception, e:
+tcpcom.py:399:-            print "Caught exception in TCPClient.CONNECTING:", e
+tcpcom.py:399:+        except Exception as e:
+tcpcom.py:400:+            print("Caught exception in TCPClient.CONNECTING:", e)
+tcpcom.py:401:         try:
+tcpcom.py:402:             self.isClientConnecting = True
+tcpcom.py:403:             host = (self.ipAddress, self.port)
+tcpcom.py:411:             self.isClientConnecting = False
+tcpcom.py:412:             try:
+tcpcom.py:413:                 self.stateChanged(TCPClient.CONNECTION_FAILED, self.ipAddress + ":" + str(self.port))
+tcpcom.py:414:-            except Exception, e:
+tcpcom.py:414:-                print "Caught exception in TCPClient.CONNECTION_FAILED:", e
+tcpcom.py:414:+            except Exception as e:
+tcpcom.py:415:+                print("Caught exception in TCPClient.CONNECTION_FAILED:", e)
+tcpcom.py:416:             TCPClient.debug("Connection failed.")
+tcpcom.py:417:             return False
+tcpcom.py:418:         ClientHandler(self)
+tcpcom.py:427:             TCPClient.debug("Connection refused")
+tcpcom.py:428:             try:
+tcpcom.py:429:                 self.stateChanged(TCPClient.SERVER_OCCUPIED, self.ipAddress + ":" + str(self.port))
+tcpcom.py:430:-            except Exception, e:
+tcpcom.py:430:-                print "Caught exception in TCPClient.SERVER_OCCUPIED:", e
+tcpcom.py:430:+            except Exception as e:
+tcpcom.py:431:+                print("Caught exception in TCPClient.SERVER_OCCUPIED:", e)
+tcpcom.py:432:             return False
+tcpcom.py:433: 
+tcpcom.py:434:         try:
+tcpcom.py:435:             self.stateChanged(TCPClient.CONNECTED, self.ipAddress + ":" + str(self.port))
+tcpcom.py:436:-        except Exception, e:
+tcpcom.py:436:-            print "Caught exception in TCPClient.CONNECTED:", e
+tcpcom.py:436:+        except Exception as e:
+tcpcom.py:437:+            print("Caught exception in TCPClient.CONNECTED:", e)
+tcpcom.py:438:         TCPClient.debug("Successfully connected")
+tcpcom.py:439:         return True
+tcpcom.py:440: 
+tcpcom.py:471:     @staticmethod
+tcpcom.py:472:     def debug(msg):
+tcpcom.py:473:         if TCPClient.isVerbose:
+tcpcom.py:474:-            print "   TCPClient-> " + msg
+tcpcom.py:474:+            print("   TCPClient-> " + msg)
+tcpcom.py:475: 
+tcpcom.py:476:     @staticmethod
+tcpcom.py:477:     def getVersion():
+tcpcom.py:498:                 for i in range(len(junk) - 1):
+tcpcom.py:499:                     try:
+tcpcom.py:500:                         self.client.stateChanged(TCPClient.MESSAGE, junk[i])
+tcpcom.py:501:-                    except Exception, e:
+tcpcom.py:501:-                        print "Caught exception in TCPClient.MESSAGE:", e
+tcpcom.py:501:+                    except Exception as e:
+tcpcom.py:502:+                        print("Caught exception in TCPClient.MESSAGE:", e)
+tcpcom.py:503:             except:    
+tcpcom.py:504:                 TCPClient.debug("Exception in readResponse() Msg: " + str(sys.exc_info()[0]) +                    " at line # " +  str(sys.exc_info()[-1].tb_lineno))
+tcpcom.py:508:                 break
+tcpcom.py:509:         try:
+tcpcom.py:510:             self.client.stateChanged(TCPClient.DISCONNECTED, "")
+tcpcom.py:511:-        except Exception, e:
+tcpcom.py:511:-            print "Caught exception in TCPClient.DISCONNECTED:", e
+tcpcom.py:511:+        except Exception as e:
+tcpcom.py:512:+            print("Caught exception in TCPClient.DISCONNECTED:", e)
+tcpcom.py:513:         TCPClient.debug("ClientHandler thread terminated")
+tcpcom.py:514: 
+tcpcom.py:515:     def readResponse(self):
+tcpcom.py:610:                         try:
+tcpcom.py:611:                             stateHandler()
+tcpcom.py:612:                         except:
+tcpcom.py:613:-                            print "Exception in stateHandler()"
+tcpcom.py:613:+                            print("Exception in stateHandler()")
+tcpcom.py:614:             else:
+tcpcom.py:615:                 self.sendMessage(self.getHeader1())
+tcpcom.py:616:             self.disconnect()
+tcpcom.py:637: 
+tcpcom.py:638:     def debug(self, msg):
+tcpcom.py:639:         if self.verbose:
+tcpcom.py:640:-            print("   HTTPServer-> " + msg)
+tcpcom.py:640:+            print(("   HTTPServer-> " + msg))
+tcpcom.py:641: 
+tcpcom.py:642:     @staticmethod
+tcpcom.py:643:     def getServerIP():
