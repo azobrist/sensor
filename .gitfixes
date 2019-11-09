@@ -1,15 +1,4 @@
-client.py:18:     elif state == "MESSAGE":
-client.py:19:        print("Client:-- Received data:",msg)
-client.py:20: 
-client.py:21:-client = TCPClient(IP_ADDRESS, IP_PORT, stateChanged = onStateChanged, isVerbose = True)
-client.py:21:+client = TCPClient(IP_ADDRESS, IP_PORT, stateChanged = onStateChanged, isVerbose = False)
-client.py:22: rc = client.connect()
-client.py:23: msg="go"
-client.py:24: if rc:
-server.py:17:         if msg == "end":
-server.py:18:             server.terminate()
-server.py:19: 
-server.py:20:-server = TCPServer(IP_PORT, stateChanged = onStateChanged, isVerbose = True)
-server.py:20: No newline at end of file
-server.py:21:+server = TCPServer(IP_PORT, stateChanged = onStateChanged, isVerbose = False)
-server.py:22: No newline at end of file
+.gitignore:1: madgwick/
+.gitignore:2: __pycache__/
+.gitignore:3:+
+.gitignore:4:+*.pyc

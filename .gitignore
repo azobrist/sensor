@@ -1,2 +1,4 @@
 madgwick/
 __pycache__/
+
+*.pyc
