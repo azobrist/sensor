@@ -1,5 +1,6 @@
 #!/usr/bin/python2
 from tcpcom2 import TCPServer
+from read import *
 import time
 
 IP_PORT = 22000
@@ -13,7 +14,7 @@ def onStateChanged(state, msg):
     elif state == "MESSAGE":
         print("Server:-- Message received:",msg)
         if msg == "go":
-            server.sendMessage("Hello")
+            server.sendMessage(read_all(imu))
         if msg == "end":
             server.terminate()
 
