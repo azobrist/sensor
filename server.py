@@ -9,11 +9,11 @@ IP_PORT = 22000
 
 def onStateChanged(state, msg):
     if state == "LISTENING":
-        print "Server:-- Listening..."
+        print( "Server:-- Listening...")
     elif state == "CONNECTED":
-        print "Server:-- Connected to", msg
+        print(f"Server:-- Connected to{msg}")
     elif state == "MESSAGE":
-        print "Server:-- Message received:", msg
+        print(f"Server:-- Message received:{msg}")
         if msg == "go":
             server.sendMessage("Hello")
 

@@ -1,51 +1,14 @@
-client.py:1: #!/usr/bin/python3
-client.py:2: from tcpcom import TCPClient
-client.py:3:+from socket import *
-client.py:4: import time
-client.py:5: 
-client.py:6:+print(gethostname())
-client.py:7: IP_ADDRESS = "192.168.0.17"
-client.py:8: IP_PORT = 22000
-client.py:9: 
-client.py:10: def onStateChanged(state, msg):
-client.py:11:     global isConnected
-client.py:12:     if state == "CONNECTING":
-client.py:13:-       print "Client:-- Waiting for connection..."
-client.py:13:+       print("Client:-- Waiting for connection...")
-client.py:14:     elif state == "CONNECTED":
-client.py:15:-       print "Client:-- Connection estabished."
-client.py:15:+       print("Client:-- Connection estabished.")
-client.py:16:     elif state == "DISCONNECTED":
-client.py:17:-       print "Client:-- Connection lost."
-client.py:17:+       print("Client:-- Connection lost.")
-client.py:18:        isConnected = False
-client.py:19:     elif state == "MESSAGE":
-client.py:20:-       print "Client:-- Received data:", msg
-client.py:20:+       print(f"Client:-- Received data:{msg}")
-client.py:21: 
-client.py:22: client = TCPClient(IP_ADDRESS, IP_PORT, stateChanged = onStateChanged)
-client.py:23: rc = client.connect()
-client.py:24: if rc:
-client.py:25:     isConnected = True
-client.py:26:     while isConnected:
-client.py:27:-        print "Client:-- Sending command: go..."
-client.py:27:+        print("Client:-- Sending command: go...")
-client.py:28:         client.sendMessage("go")
-client.py:29:         time.sleep(2)
-client.py:30:-    print "Done"    
-client.py:30:+    print("Done")    
-client.py:31: else:
-client.py:32:-    print "Client:-- Connection failed" 
-client.py:32: No newline at end of file
-client.py:33:+    print("Client:-- Connection failed") 
-client.py:34: No newline at end of file
-server.py:1: #!/usr/bin/python3
-server.py:2: from tcpcom import TCPServer
-server.py:3:+from socket import *
-server.py:4:+
-server.py:5: import time
-server.py:6: 
-server.py:7:+print(gethostname())
-server.py:8: IP_PORT = 22000
 server.py:9: 
 server.py:10: def onStateChanged(state, msg):
+server.py:11:     if state == "LISTENING":
+server.py:12:-        print "Server:-- Listening..."
+server.py:12:+        print( "Server:-- Listening...")
+server.py:13:     elif state == "CONNECTED":
+server.py:14:-        print "Server:-- Connected to", msg
+server.py:14:+        print(f"Server:-- Connected to{msg}")
+server.py:15:     elif state == "MESSAGE":
+server.py:16:-        print "Server:-- Message received:", msg
+server.py:16:+        print(f"Server:-- Message received:{msg}")
+server.py:17:         if msg == "go":
+server.py:18:             server.sendMessage("Hello")
+server.py:19: 
