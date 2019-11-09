@@ -1,5 +1,5 @@
-#!/usr/bin/python3
-from tcpcom import TCPClient
+#!/usr/bin/python2
+from tcpcom2 import TCPClient
 import time
 
 IP_ADDRESS = "192.168.1.206"
@@ -16,7 +16,7 @@ def onStateChanged(state, msg):
        print("Client:-- Connection lost.")
        isConnected = False
     elif state == "MESSAGE":
-       print("Client:-- Received data: {0}".format(msg))
+       print("Client:-- Received data:",msg)
 
 client = TCPClient(IP_ADDRESS, IP_PORT, stateChanged = onStateChanged, isVerbose = True)
 rc = client.connect()

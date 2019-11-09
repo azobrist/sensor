@@ -1,10 +1,40 @@
+.gitignore:1: madgwick/
+.gitignore:2:+__pycache__/
+client.py:1:-#!/usr/bin/python3
+client.py:1:-from tcpcom import TCPClient
+client.py:1:+#!/usr/bin/python2
+client.py:2:+from tcpcom2 import TCPClient
+client.py:3: import time
+client.py:4: 
+client.py:5: IP_ADDRESS = "192.168.1.206"
+client.py:16:        print("Client:-- Connection lost.")
+client.py:17:        isConnected = False
+client.py:18:     elif state == "MESSAGE":
+client.py:19:-       print("Client:-- Received data: {0}".format(msg))
+client.py:19:+       print("Client:-- Received data:",msg)
+client.py:20: 
+client.py:21: client = TCPClient(IP_ADDRESS, IP_PORT, stateChanged = onStateChanged, isVerbose = True)
+client.py:22: rc = client.connect()
+server.py:1:-#!/usr/bin/python3
+server.py:1:-from tcpcom import TCPServer
+server.py:1:+#!/usr/bin/python2
+server.py:2:+from tcpcom2 import TCPServer
+server.py:3: import time
 server.py:4: 
 server.py:5: IP_PORT = 22000
 server.py:6: 
-server.py:7:-def onStateChanged(state, msg):
-server.py:7:+def onStateChanged(state, byt):
+server.py:7:-def onStateChanged(state, byt):
+server.py:7:+def onStateChanged(state, msg):
 server.py:8:     print(state)
-server.py:9:+    msg = byt.decode()
-server.py:10:     if state == "LISTENING":
-server.py:11:         print("Server:-- Listening...")
-server.py:12:     elif state == "CONNECTED":
+server.py:9:-    msg = byt.decode()
+server.py:9:     if state == "LISTENING":
+server.py:10:         print("Server:-- Listening...")
+server.py:11:     elif state == "CONNECTED":
+server.py:12:-        print("Server:-- Connected to {0}".format(msg))
+server.py:12:+        print("Server:-- Connected to", msg)
+server.py:13:     elif state == "MESSAGE":
+server.py:14:-        print("Server:-- Message received: {0}".format(msg))
+server.py:14:+        print("Server:-- Message received:",msg)
+server.py:15:         if msg == "go":
+server.py:16:             server.sendMessage("Hello")
+server.py:17:         if msg == "end":
