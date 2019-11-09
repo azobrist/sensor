@@ -9,6 +9,7 @@ print("ax,ay,az,gx,gy,gz,mx,my,mz")
 def read_all(imu):
     line = imu.read_accelerometer_gyro_data()
     line += imu.read_magnetometer_data()
+    print(line)
     return line
 
 if __name__ == "__main__":
