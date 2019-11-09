@@ -1,8 +1,8 @@
-server.py:14:     elif state == "MESSAGE":
-server.py:15:         print("Server:-- Message received:",msg)
 server.py:16:         if msg == "go":
-server.py:17:+            msg = read_all(imu)
-server.py:18:+            print(msg)
-server.py:19:             server.sendMessage(read_all(imu))
+server.py:17:             msg = read_all(imu)
+server.py:18:             print(msg)
+server.py:19:-            server.sendMessage(read_all(imu))
+server.py:19:+            server.sendMessage(msg)
 server.py:20:         if msg == "end":
 server.py:21:             server.terminate()
+server.py:22: 
