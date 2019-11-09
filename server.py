@@ -17,4 +17,4 @@ def onStateChanged(state, msg):
         if msg == "end":
             server.terminate()
 
-server = TCPServer(IP_PORT, stateChanged = onStateChanged, isVerbose = True)
+server = TCPServer(IP_PORT, stateChanged = onStateChanged, isVerbose = False)

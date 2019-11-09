@@ -18,7 +18,7 @@ def onStateChanged(state, msg):
     elif state == "MESSAGE":
        print("Client:-- Received data:",msg)
 
-client = TCPClient(IP_ADDRESS, IP_PORT, stateChanged = onStateChanged, isVerbose = True)
+client = TCPClient(IP_ADDRESS, IP_PORT, stateChanged = onStateChanged, isVerbose = False)
 rc = client.connect()
 msg="go"
 if rc:
