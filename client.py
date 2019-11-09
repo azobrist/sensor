@@ -1,13 +1,12 @@
 #!/usr/bin/python2
 from tcpcom2 import TCPClient
-from socket import *
 import time
 
-print(gethostname())
 IP_ADDRESS = "192.168.1.206"
 IP_PORT = 22000
 
 def onStateChanged(state, msg):
+    print(state)
     global isConnected
     if state == "CONNECTING":
        print("Client:-- Waiting for connection...")

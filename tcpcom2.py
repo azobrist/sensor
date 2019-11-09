@@ -56,14 +56,14 @@ class TCPServer(Thread):
     '''
     Class that represents a TCP socket based server.
     '''
-    isVerbose = False
+    isVerbose = True
     PORT_IN_USE = "PORT_IN_USE"
     CONNECTED = "CONNECTED"
     LISTENING = "LISTENING"
     TERMINATED = "TERMINATED"
     MESSAGE = "MESSAGE"
 
-    def __init__(self, port, stateChanged, endOfBlock = '\0', isVerbose = False):
+    def __init__(self, port, stateChanged, endOfBlock = '\0', isVerbose = True):
         '''
         Creates a TCP socket server that listens on TCP port
         for a connecting client. The server runs in its own thread, so the
@@ -320,7 +320,7 @@ class TCPClient():
     '''
     Class that represents a TCP socket based client.
     '''
-    isVerbose = False
+    isVerbose = True
     CONNECTING = "CONNECTING"
     SERVER_OCCUPIED = "SERVER_OCCUPIED"
     CONNECTION_FAILED = "CONNECTION_FAILED"
@@ -328,7 +328,7 @@ class TCPClient():
     DISCONNECTED = "DISCONNECTED"
     MESSAGE = "MESSAGE"
 
-    def __init__(self, ipAddress, port, stateChanged, isVerbose = False):
+    def __init__(self, ipAddress, port, stateChanged, isVerbose = True):
         '''
         Creates a TCP socket client prepared for a connection with a
         TCPServer at given address and port.
@@ -543,7 +543,7 @@ class HTTPServer(TCPServer):
     def onStop(self):
         self.terminate()
     
-    def __init__(self, requestHandler, serverName = "PYSERVER", port = 80, isVerbose = False):
+    def __init__(self, requestHandler, serverName = "PYSERVER", port = 80, isVerbose = True):
         '''
 
         Creates a HTTP server (inherited from TCPServer) that listens for a connecting client on given port (default = 80). 

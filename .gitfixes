@@ -1,8 +1,68 @@
-server.py:13:     elif state == "CONNECTED":
-server.py:14:         print("Server:-- Connected to {0}".format(msg))
-server.py:15:     elif state == "MESSAGE":
-server.py:16:-        print("Server:-- Message received: {0}".formt(msg))
-server.py:16:+        print("Server:-- Message received: {0}".format(msg))
-server.py:17:         if msg == "go":
-server.py:18:             server.sendMessage("Hello")
-server.py:19: 
+client.py:1: #!/usr/bin/python2
+client.py:2: from tcpcom2 import TCPClient
+client.py:3:-from socket import *
+client.py:3: import time
+client.py:4: 
+client.py:5:-print(gethostname())
+client.py:5: IP_ADDRESS = "192.168.1.206"
+client.py:6: IP_PORT = 22000
+client.py:7: 
+client.py:8: def onStateChanged(state, msg):
+client.py:9:+    print(state)
+client.py:10:     global isConnected
+client.py:11:     if state == "CONNECTING":
+client.py:12:        print("Client:-- Waiting for connection...")
+server.py:1: #!/usr/bin/python2
+server.py:2: from tcpcom2 import TCPServer
+server.py:3:-from socket import *
+server.py:3:-
+server.py:3: import time
+server.py:4: 
+server.py:5:-print(gethostname())
+server.py:5: IP_PORT = 22000
+server.py:6: 
+server.py:7: def onStateChanged(state, msg):
+server.py:8:+    print(state)
+server.py:9:     if state == "LISTENING":
+server.py:10:         print("Server:-- Listening...")
+server.py:11:     elif state == "CONNECTED":
+tcpcom2.py:56:     '''
+tcpcom2.py:57:     Class that represents a TCP socket based server.
+tcpcom2.py:58:     '''
+tcpcom2.py:59:-    isVerbose = False
+tcpcom2.py:59:+    isVerbose = True
+tcpcom2.py:60:     PORT_IN_USE = "PORT_IN_USE"
+tcpcom2.py:61:     CONNECTED = "CONNECTED"
+tcpcom2.py:62:     LISTENING = "LISTENING"
+tcpcom2.py:63:     TERMINATED = "TERMINATED"
+tcpcom2.py:64:     MESSAGE = "MESSAGE"
+tcpcom2.py:65: 
+tcpcom2.py:66:-    def __init__(self, port, stateChanged, endOfBlock = '0', isVerbose = False):
+tcpcom2.py:66:+    def __init__(self, port, stateChanged, endOfBlock = '0', isVerbose = True):
+tcpcom2.py:67:         '''
+tcpcom2.py:68:         Creates a TCP socket server that listens on TCP port
+tcpcom2.py:69:         for a connecting client. The server runs in its own thread, so the
+tcpcom2.py:320:     '''
+tcpcom2.py:321:     Class that represents a TCP socket based client.
+tcpcom2.py:322:     '''
+tcpcom2.py:323:-    isVerbose = False
+tcpcom2.py:323:+    isVerbose = True
+tcpcom2.py:324:     CONNECTING = "CONNECTING"
+tcpcom2.py:325:     SERVER_OCCUPIED = "SERVER_OCCUPIED"
+tcpcom2.py:326:     CONNECTION_FAILED = "CONNECTION_FAILED"
+tcpcom2.py:328:     DISCONNECTED = "DISCONNECTED"
+tcpcom2.py:329:     MESSAGE = "MESSAGE"
+tcpcom2.py:330: 
+tcpcom2.py:331:-    def __init__(self, ipAddress, port, stateChanged, isVerbose = False):
+tcpcom2.py:331:+    def __init__(self, ipAddress, port, stateChanged, isVerbose = True):
+tcpcom2.py:332:         '''
+tcpcom2.py:333:         Creates a TCP socket client prepared for a connection with a
+tcpcom2.py:334:         TCPServer at given address and port.
+tcpcom2.py:543:     def onStop(self):
+tcpcom2.py:544:         self.terminate()
+tcpcom2.py:545:     
+tcpcom2.py:546:-    def __init__(self, requestHandler, serverName = "PYSERVER", port = 80, isVerbose = False):
+tcpcom2.py:546:+    def __init__(self, requestHandler, serverName = "PYSERVER", port = 80, isVerbose = True):
+tcpcom2.py:547:         '''
+tcpcom2.py:548: 
+tcpcom2.py:549:         Creates a HTTP server (inherited from TCPServer) that listens for a connecting client on given port (default = 80). 

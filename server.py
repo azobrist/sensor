@@ -1,13 +1,11 @@
 #!/usr/bin/python2
 from tcpcom2 import TCPServer
-from socket import *
-
 import time
 
-print(gethostname())
 IP_PORT = 22000
 
 def onStateChanged(state, msg):
+    print(state)
     if state == "LISTENING":
         print("Server:-- Listening...")
     elif state == "CONNECTED":
