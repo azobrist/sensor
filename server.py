@@ -1,7 +1,10 @@
 #!/usr/bin/python3
 from tcpcom import TCPServer
+from socket import *
+
 import time
 
+print(gethostname())
 IP_PORT = 22000
 
 def onStateChanged(state, msg):
