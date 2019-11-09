@@ -23,7 +23,7 @@ def onStateChanged(state, msg):
        print("Client:-- Received data:",msg)
        data = msg.split(",")
     #    print(data)
-       ts = data[-1]
+       ts = float(data[-1])
        print("deltat:",ts-last)
        last=ts
 

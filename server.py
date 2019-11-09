@@ -6,7 +6,6 @@ import time
 IP_PORT = 22000
 
 def onStateChanged(state, msg):
-    print(state)
     if state == "LISTENING":
         print("Server:-- Listening...")
     elif state == "CONNECTED":
@@ -15,7 +14,6 @@ def onStateChanged(state, msg):
         print("Server:-- Message received:",msg)
         if msg == "go":
             msg = read_all(imu)
-            print(msg)
             server.sendMessage(msg)
         if msg == "end":
             server.terminate()
