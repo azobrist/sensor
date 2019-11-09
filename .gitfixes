@@ -1,4 +1,5 @@
-.gitignore:1: madgwick/
-.gitignore:2: __pycache__/
-.gitignore:3:+
-.gitignore:4:+*.pyc
+read.py:1:-#!/usr/bin/python3
+read.py:1:+#!/usr/bin/python2
+read.py:2: import time
+read.py:3: from icm20948 import ICM20948
+read.py:4: 
