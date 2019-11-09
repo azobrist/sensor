@@ -9,6 +9,7 @@ ts=0
 last=0
 
 def onStateChanged(state, msg):
+    global ts
     global last
     global isConnected
     if state == "CONNECTING":
@@ -21,10 +22,10 @@ def onStateChanged(state, msg):
     elif state == "MESSAGE":
        print("Client:-- Received data:",msg)
        data = msg.split(",")
-       print(data)
-    #    ts = data[-1]
-    #    print("deltat:",ts-last)
-    #    last=ts
+    #    print(data)
+       ts = data[-1]
+       print("deltat:",ts-last)
+       last=ts
 
 client = TCPClient(IP_ADDRESS, IP_PORT, stateChanged = onStateChanged, isVerbose = False)
 rc = client.connect()
