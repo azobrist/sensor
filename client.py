@@ -7,15 +7,22 @@ IP_PORT = 22000
 
 ts=0
 last=0
+lapsed=time.time()
+delay_s=0.1
 
 def onStateChanged(state, msg):
     global ts
     global last
+    global lapsed
     global isConnected
+    global delay_s
+    print(state)
     if state == "CONNECTING":
        print("Client:-- Waiting for connection...")
     elif state == "CONNECTED":
-       print("Client:-- Connection estabished.")
+        print("Client:-- Connection estabished.")
+        # if time.time() - lapsed > delay_s * 10:
+            # client.sendMessage("end")
     elif state == "DISCONNECTED":
        print("Client:-- Connection lost.")
        isConnected = False
@@ -26,20 +33,20 @@ def onStateChanged(state, msg):
        ts = float(data[-1])
        print("deltat:",ts-last)
        last=ts
+       lapsed=time.time()
 
 client = TCPClient(IP_ADDRESS, IP_PORT, stateChanged = onStateChanged, isVerbose = False)
 rc = client.connect()
 msg="go"
 cnt = 0
-delay_s = 0.1
 if rc:
     isConnected = True
     while isConnected:
         print("Client:-- Sending command: go...")
         client.sendMessage(msg)
         time.sleep(delay_s)
-        if cnt == 10:
-            msg="end"
+        # if cnt == 10:
+            # msg="end"
         cnt+=1
     print("Done")    
 else:
