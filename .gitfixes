@@ -1,50 +1,11 @@
-client.py:7: 
-client.py:8: ts=0
-client.py:9: last=0
-client.py:10:-lapsed=time.time()
-client.py:10: delay_s=0.1
-client.py:11: 
-client.py:12: def onStateChanged(state, msg):
-client.py:13:     global ts
-client.py:14:     global last
-client.py:15:-    global lapsed
-client.py:15:     global isConnected
-client.py:16:     global delay_s
-client.py:17:-    print(state)
-client.py:17:     if state == "CONNECTING":
-client.py:18:        print("Client:-- Waiting for connection...")
-client.py:19:     elif state == "CONNECTED":
-client.py:20:         print("Client:-- Connection estabished.")
-client.py:21:-        # if time.time() - lapsed > delay_s * 10:
-client.py:21:-            # client.sendMessage("end")
-client.py:21:     elif state == "DISCONNECTED":
-client.py:22:        print("Client:-- Connection lost.")
-client.py:23:        isConnected = False
-client.py:24:     elif state == "MESSAGE":
-client.py:25:        print("Client:-- Received data:",msg)
-client.py:26:        data = msg.split(",")
-client.py:27:-    #    print(data)
-client.py:27:        ts = float(data[-1])
-client.py:28:        print("deltat:",ts-last)
-client.py:29:        last=ts
-client.py:30:-       lapsed=time.time()
-client.py:30: 
-client.py:31: client = TCPClient(IP_ADDRESS, IP_PORT, stateChanged = onStateChanged, isVerbose = False)
-client.py:32: rc = client.connect()
-client.py:38:         print("Client:-- Sending command: go...")
-client.py:39:         client.sendMessage(msg)
-client.py:40:         time.sleep(delay_s)
-client.py:41:-        # if cnt == 10:
-client.py:41:-            # msg="end"
-client.py:41:+        if cnt == 10:
-client.py:42:+            msg="end"
-client.py:43:         cnt+=1
-client.py:44:     print("Done")    
-client.py:45: else:
-server.py:6: IP_PORT = 22000
-server.py:7: 
-server.py:8: def onStateChanged(state, msg):
-server.py:9:-    print(state)
-server.py:9:     if state == "LISTENING":
-server.py:10:         print("Server:-- Listening...")
-server.py:11:     elif state == "CONNECTED":
+server.py:12:         print("Server:-- Connected to", msg)
+server.py:13:     elif state == "MESSAGE":
+server.py:14:         print("Server:-- Message received:",msg)
+server.py:15:+        # p = msg.split(",")
+server.py:16:+        # cmd = p[0]
+server.py:17:+        # delay = p[1]
+server.py:18:         if msg == "go":
+server.py:19:+            server.setTimeout(5)
+server.py:20:             msg = read_all(imu)
+server.py:21:             server.sendMessage(msg)
+server.py:22:         if msg == "end":

@@ -12,7 +12,11 @@ def onStateChanged(state, msg):
         print("Server:-- Connected to", msg)
     elif state == "MESSAGE":
         print("Server:-- Message received:",msg)
+        # p = msg.split(",")
+        # cmd = p[0]
+        # delay = p[1]
         if msg == "go":
+            server.setTimeout(5)
             msg = read_all(imu)
             server.sendMessage(msg)
         if msg == "end":
